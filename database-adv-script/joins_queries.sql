@@ -1,12 +1,17 @@
-SELECT booking_id,property_id,start_date,end_date, first_name,last_name, email
-FROM BOOKING
-INNER JOIN USER ON BOOKING.user_id = USER.user_id;
+SELECT b.booking_id,b.property_id,b.start_date,b.end_date, u.first_name,u.last_name, u.email
+FROM BOOKINGS b
+INNER JOIN USER u ON b.user_id = u.user_id;
 
 
-SELECT property_id, host_id, name, review_id, rating
-FROM PROPERTIES
-LEFT JOIN REVIEW ON PROPERTIES.property_id = REVIEW.property_id
-ORDER BY rating
+SELECT p.property_id, 
+       p.property_name, 
+       r.review_id, 
+       r.rating, 
+       r.comment
+FROM PROPERTIES p
+LEFT JOIN REVIEWS r 
+  ON p.property_id = r.property_id;
+
 
 
 SELECT first_name,last_name,email, booking_id,start_date, end_date
