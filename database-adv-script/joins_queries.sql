@@ -1,19 +1,16 @@
-SELECT b.booking_id,b.property_id,b.start_date,b.end_date, u.first_name,u.last_name, u.email
-FROM BOOKINGS b
-INNER JOIN USER u ON b.user_id = u.user_id;
+-- Inner Join
+SELECT u.user_id, u.first_name,b.book_id
+FROM USERS u
+INNER JOIN BOOKINGS b ON (b.user_id = u.user_id)
 
 
-SELECT p.property_id, 
-       p.property_name, 
-       r.review_id, 
-       r.rating, 
-       r.comment
+-- Left queries
+SELECT p.property_id,p.name,p.location, r.rating, r.comment
 FROM PROPERTIES p
-LEFT JOIN REVIEWS r 
-  ON p.property_id = r.property_id;
+LEFT JOIN REVIEWS r ON (r.property_id = p.property_id)
 
 
-
-SELECT first_name,last_name,email, booking_id,start_date, end_date
-FROM USER
-FULL OUTER JOIN BOOKING ON USER.user_id = BOOKING.user_id
+-- Full Outer Join
+SELECT u.user_id, u.email, u.first_name, b.property_id, b.start_date, b.end_date
+FROM USERS u
+FULL OUTER JOIN BOOKINGS b ON (b.user_id = u.user_id)

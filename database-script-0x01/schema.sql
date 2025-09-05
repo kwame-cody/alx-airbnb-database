@@ -21,7 +21,7 @@ CREATE TABLE PROPERTIES (
     price_per_night DECIMAL(10, 2) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
-    FOREIGN KEY (host_id) REFERENCES USER(user_id)
+    FOREIGN KEY (host_id) REFERENCES USERS(user_id)
 );
 
 CREATE TABLE BOOKINGS (
@@ -34,7 +34,7 @@ CREATE TABLE BOOKINGS (
     status VARCHAR(50) NOT NULL CHECK (status IN ('pending', 'confirmed', 'canceled')),
     created_at TIMESTAMP NOT NULL,
     FOREIGN KEY (property_id) REFERENCES PROPERTIES(property_id),
-    FOREIGN KEY (user_id) REFERENCES USER(user_id)
+    FOREIGN KEY (user_id) REFERENCES USERS(user_id)
 );
 
 
@@ -44,7 +44,7 @@ CREATE TABLE PAYMENTS (
     amount DECIMAL(10, 2) NOT NULL,
     payment_date TIMESTAMP NOT NULL,
     payment_method VARCHAR(50) NOT NULL CHECK (payment_method IN ('credit_card', 'paypal', 'stripe')),
-    FOREIGN KEY (booking_id) REFERENCES BOOKING(booking_id)
+    FOREIGN KEY (booking_id) REFERENCES BOOKINGS(booking_id)
 );
 
 CREATE TABLE MESSAGES(
@@ -53,8 +53,8 @@ CREATE TABLE MESSAGES(
     recipient_id VARCHAR(36) NOT NULL,
     message_body TEXT NOT NULL,
     sent_at TIMESTAMP NOT NULL,
-    FOREIGN KEY (sender_id) REFERENCES USER(user_id),
-    FOREIGN KEY (recipient_id) REFERENCES USER(user_id)
+    FOREIGN KEY (sender_id) REFERENCES USERS(user_id),
+    FOREIGN KEY (recipient_id) REFERENCES USERS(user_id)
 )
 
 CREATE TABLE REVIEWS(
@@ -65,6 +65,6 @@ CREATE TABLE REVIEWS(
     comment TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     FOREIGN KEY (property_id) REFERENCES PROPERTIES(property_id),
-    FOREIGN KEY (user_id)  REFERENCES USER(user_id)
+    FOREIGN KEY (user_id)  REFERENCES USERS(user_id)
 )
 
