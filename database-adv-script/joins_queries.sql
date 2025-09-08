@@ -8,6 +8,7 @@ INNER JOIN BOOKINGS b ON (b.user_id = u.user_id)
 SELECT p.property_id,p.name,p.location, r.rating, r.comment
 FROM PROPERTIES p
 LEFT JOIN REVIEWS r ON (r.property_id = p.property_id)
+ORDER BY p.name
 
 
 -- Full Outer Join
